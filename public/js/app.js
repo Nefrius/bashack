@@ -2,49 +2,75 @@ document.addEventListener('DOMContentLoaded', () => {
   const apiUrl = 'https://api.lanyard.rest/v1/users/1127276483359014963';
   const statusIndicator = document.getElementById('status-indicator');
   const statusText = document.getElementById('status-text');
+  
+  
 
-  function updateStatus() {
-    fetch(apiUrl)
-      .then(response => response.json())
-      .then(data => {
-        if (data.data && data.data.discord_status) {
-          const status = data.data.discord_status;
-          switch (status) {
-            case 'online':
-              statusIndicator.classList.replace('bg-gray-500', 'bg-green-500');
-              statusText.textContent = 'Çevrimiçi';
-              break;
-            case 'dnd':
-              statusIndicator.classList.replace('bg-gray-500', 'bg-red-500');
-              statusText.textContent = 'Rahatsız Etmeyin';
-              break;
-            case 'idle':
-              statusIndicator.classList.replace('bg-gray-500', 'bg-yellow-500');
-              statusText.textContent = 'Boşta';
-              break;
-            case 'offline':
-              statusIndicator.classList.replace('bg-gray-500', 'bg-gray-500');
-              statusText.textContent = 'Çevrimdışı';
-              break;
-            default:
-              statusIndicator.classList.replace('bg-gray-500', 'bg-gray-500');
-              statusText.textContent = 'Bilinmiyor';
-          }
-        } else {
-          statusIndicator.classList.replace('bg-gray-500', 'bg-gray-500');
-          statusText.textContent = 'Hata alındı';
-        }
-      })
-      .catch(error => {
-        console.error('Hata:', error);
-        statusIndicator.classList.replace('bg-gray-500', 'bg-gray-500');
-        statusText.textContent = 'Hata';
-      });
-  }
 
   updateStatus();
-  setInterval(updateStatus, 60000); // 60 saniyede bir güncelle
+  
 });
+    document.getElementById('deny-btn').addEventListener('click', function() {
+      // Sayfayı kapat
+      window.close();  // Tarayıcı izin verirse sayfayı kapatır
+    });
+
+    document.getElementById('accept-btn').addEventListener('click', function() {
+      // Fade-out efekti ile alert kutusunu gizle
+      const alertBox = document.getElementById('cookie-alert');
+      alertBox.classList.add('opacity-0');  // opaklığı sıfıra indirerek görünmez yap
+      
+      // 0.5 saniye sonra (transition süresiyle uyumlu) tamamen gizle
+      setTimeout(function() {
+        alertBox.style.display = 'none';
+      }, 500);  // 500ms = 0.5s
+    });
+
+
+function updateDiscordStatus() {
+  // Lanyard API'sinden veriyi çek
+  fetch('https://api.lanyard.rest/v1/users/1127276483359014963')
+    .then(response => response.json())
+    .then(data => {
+      const discordData = data.data;
+      const status = discordData.discord_status;
+      const profilePicture = discordData.discord_user.avatar
+        ? `https://cdn.discordapp.com/avatars/${discordData.discord_user.id}/${discordData.discord_user.avatar}.png`
+        : '/docs/images/people/profile-picture-5.jpg';
+      const username = `${discordData.discord_user.username}#${discordData.discord_user.discriminator}`;
+      const customStatus = discordData.activities.find(activity => activity.type === 4)?.state || 'No status';
+
+      // Profil fotoğrafını ve adını güncelle
+      document.getElementById('profile-picture').src = profilePicture;
+      document.getElementById('username').textContent = username;
+      document.getElementById('status-text').textContent = customStatus;
+
+      // Duruma göre renkleri ayarla
+      const statusCircle = document.getElementById('status-circle');
+      statusCircle.classList.remove('bg-green-400', 'bg-yellow-400', 'bg-red-500', 'bg-gray-400');
+
+      switch(status) {
+        case 'online':
+          statusCircle.classList.add('bg-green-400');
+          break;
+        case 'idle':
+          statusCircle.classList.add('bg-yellow-400');
+          break;
+        case 'dnd':
+          statusCircle.classList.add('bg-red-500');
+          break;
+        case 'offline':
+        default:
+          statusCircle.classList.add('bg-gray-400');
+          break;
+      }
+    })
+    .catch(error => console.error('API verisi çekilemedi:', error));
+}
+
+// 15 saniyede bir veriyi güncelle
+updateDiscordStatus();
+setInterval(updateDiscordStatus, 15000);
+
 
 window.addEventListener("load", function() {
   setTimeout(function() {
@@ -56,3 +82,10 @@ window.addEventListener("load", function() {
 module.exports = (req, res) => {
   res.status(404).json({ message: 'Not Found' });
 };
+
+function playClickSound() {
+  var audio = new Audio('click.wav'); // Ses dosyasının yolunu belirtin
+  audio.play();
+}
+
+document.addEventListener('click', playClickSound);
