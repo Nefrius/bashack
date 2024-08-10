@@ -52,3 +52,7 @@ window.addEventListener("load", function() {
     document.getElementById("content").classList.remove("hidden");
   }, 1000);
 });
+
+module.exports = (req, res) => {
+  res.status(404).json({ message: 'Not Found' });
+};
