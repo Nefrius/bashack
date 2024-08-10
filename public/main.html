@@ -1,0 +1,223 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+
+  <!-- Tailwind CSS bağlantısını ekleyin -->
+
+  <link href="./css/styles.css" rel="stylesheet">
+
+  <style>
+    .card-transform {
+      transition: transform 0.3s ease;
+    }
+    .card-transform:hover {
+      transform: scale(1.05);
+    }
+
+    .fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #0a0a0a; /* adjust the background color to match your theme */
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #loading {
+      transition: opacity 0.5s ease-out;
+    }
+
+    /* Loading animation gizle */
+    #loading.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+  </style>
+  
+</head>
+
+<body class="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950">
+
+  <div class="fixed" id="loading">
+    <span class="loading loading-ring loading-lg show"></span>
+  </div>
+
+
+  <div id="content" class="hidden">
+    <div class="flex h-screen">
+
+      <!-- Sol Menü -->
+      <div class="w-64 bg-neutral-900 text-white flex flex-col justify-between font-gega-ic">
+        <!-- Üst Menü -->
+        <div class="p-4 mt-4">
+          <h2 class="text-xl font-bold mb-6">Bashack</h2>
+          <ul class="space-y-4">
+            <li><a href="#" class="hover:text-pink-500 transition-colors duration-300">Kali Linux İçin Tool</a></li>
+            <li><a href="#" class="hover:text-pink-500 transition-colors duration-300">Postlar</a></li>
+            <li><a href="#" class="hover:text-pink-500 transition-colors duration-300">Adminler</a></li>
+            <li><a href="#" class="hover:text-pink-500 transition-colors duration-300">Hakkımızda</a></li>
+          </ul>
+        </div>
+  
+        <!-- Alt Menü -->
+        <div class="p-4 border-t">
+          <h3 class="text-lg font-semibold mb-4">Discord Durumu</h3>
+          <div id="discord-status" class="flex items-center space-x-3">
+            <div id="status-indicator" class="w-3 h-3 rounded-full bg-gray-500"></div>
+            <span id="status-text" class="text-white">Yükleniyor...</span>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Sağ Kısım -->
+  
+      <div class="flex-1 bg-black-100 text-white/90 font-gega-baslik p-6 overflow-auto ml-36">
+        
+        <div class="flex flex-wrap space-x-6">
+          
+          <div class="join ml-[1020px] relative mt-1 mb-4">
+            <input
+              class="join-item btn btn-square"
+              type="radio"
+              name="options"
+              aria-label="1"
+              checked="checked" />
+            <input class="join-item btn btn-square" type="radio" name="options" aria-label="2" />
+            <input class="join-item btn btn-square" type="radio" name="options" aria-label="3" />
+            <input class="join-item btn btn-square" type="radio" name="options" aria-label="4" />
+          </div>
+  
+          <div onclick="location.href='/';" class=" w-96 cursor-pointer card bg-slate-100/10 shadow-xl mt-[5px] card-transform">
+            <figure>
+              <img src="images/nmap.png" alt="Shoes" />
+            </figure> 
+            <div class="card-body">
+              <h2 class="card-title">
+                Nmap
+                <div class="badge badge-secondary">Nmap</div>
+              </h2>
+              <p>Nmap, ağ tarama ve zafiyet tespiti için kullanılan açık kaynaklı bir araçtır. İsmini Network Mapper'in kısaltmasından almaktadır.</p>
+              <div class="card-actions justify-end">
+                <div class="badge badge-outline">Ağ</div>
+                <div class="badge badge-outline">Port</div>
+              </div>
+            </div>  
+          </div>
+        
+          <div onclick="location.href='/';" class=" w-96 cursor-pointer card bg-slate-100/10 shadow-xl mt-[5px] card-transform">
+            <figure>
+              <img src="images/zphisher.png" alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h2 class="card-title"> 
+                Zphisher
+                <div class="badge badge-secondary">zphisher</div>
+              </h2>
+              <p>Phishing, dolandırıcılar tarafından rastgele kullanıcı hesaplarına e-posta gönderilerek yapılan çevrimiçi saldırı türüdür.</p>
+              <div class="card-actions justify-end">
+                <div class="badge badge-outline">Sızma</div>
+                <div class="badge badge-outline">Şifre Kırma</div>
+              </div>
+            </div>  
+          </div>
+        
+          <div onclick="location.href='/';" class="cursor-pointer card bg-slate-100/10 w-96 shadow-xl mt-[5px] card-transform">
+            <figure>
+              <img src="images/metasploit.png" alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h2 class="card-title">
+                Metasploit
+                <div class="badge badge-secondary">Metasploit</div>
+              </h2>
+              <p>Metasploit Projesi, güvenlik açıkları hakkında bilgi sağlayan, sızma testleri ve IDS imza gelişmesinde yardımcı olan bir framework projesidir.</p>
+              <div class="card-actions justify-end">
+                <div class="badge badge-outline">Ağ</div>
+                <div class="badge badge-outline">Sızma</div>
+              </div>
+            </div>  
+          </div>
+  
+          <div onclick="location.href='/';" class="cursor-pointer card bg-slate-100/10 w-96 shadow-xl mt-[30px] card-transform">
+            <figure>
+              <img src="images/sqlmap.png" alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h2 class="card-title">
+                Sqlmap
+                <div class="badge badge-secondary">Sqlmap</div>
+              </h2>
+              <p>SQL enjeksiyon kusurlarını algılama ve kullanma işlemini otomatikleştirmek ve veritabanı sunucularının sorumluluğunu alma işlemini otomatikleştirmek için bir araçtır.</p>
+              <div class="card-actions justify-end">
+                <div class="badge badge-outline">Mysql</div>
+                <div class="badge badge-outline">Veritabanı</div>
+              </div>
+            </div>  
+          </div>
+  
+          <div onclick="location.href='/';" class="cursor-pointer card bg-slate-100/10 w-96 shadow-xl mt-[30px] card-transform">
+            <figure>
+              <img src="images/hashcat.png" alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h2 class="card-title">
+                Hashcat
+                <div class="badge badge-secondary">Metasploit</div>
+              </h2>
+              <p>Mevcut en güçlü şifre çatlama ve etik hack programlarından biridir. Mevcut en iyi hacker programlarından biridir ve kullanıcılara unutulmuş şifreleri kurtarma, şifre güvenliğini denetlemeye veya sadece bir karma içine hangi verilerin dahil edildiğini belirlemeye yardımcı olabilir.</p>
+              <div class="card-actions justify-end">
+                <div class="badge badge-outline">Şifre Kırma</div>
+                <div class="badge badge-outline">Şifre</div>
+              </div>
+            </div>  
+          </div>
+  
+          <div onclick="location.href='/';" class="cursor-pointer card bg-slate-100/10 w-96 shadow-xl mt-[30px] card-transform">
+            <figure>
+              <img src="images/johntheripper.png" alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h2 class="card-title">
+                Metasploit
+                <div class="badge badge-secondary">Ripper John</div>
+              </h2>
+              <p>Ripper John şifre çatlaması için bir araçtır. Windows, DOS ve açık VM’lerde kullanılabilir. Açık kaynaklı bir araçtır. Zayıf Unix şifrelerini tespit etmek için oluşturulur. Parola çatlamasında hızlı için en iyisidir.</p>
+              <div class="card-actions justify-end">
+                <div class="badge badge-outline">Ağ</div>
+                <div class="badge badge-outline">Şifre Kırma</div>
+              </div>
+            </div>  
+          </div>
+  
+            
+        </div>
+  
+  
+      </div>
+    </div>
+  </div>
+ 
+
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

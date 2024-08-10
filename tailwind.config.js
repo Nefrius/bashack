@@ -1,11 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+
+
   content: ["./public/**/*.{html,js}"],
   theme: {
     extend: {
 
       fontFamily: {
-        'gega-baslik': ["Montserrat", "sans-serif"]
+        'gega-baslik': ["Montserrat", "sans-serif"],
+        'gega-ic': ["Montserrat","sans-serif"],
       },
 
 
@@ -18,6 +21,8 @@ module.exports = {
     },
   
   },
-  plugins: [],
+  plugins: [
+    require('daisyui'),
+  ],
 }
 
