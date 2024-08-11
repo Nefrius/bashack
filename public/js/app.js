@@ -26,34 +26,34 @@ updateStatus();
 
 });
 
-// const cookieAlert = document.getElementById('cookie-alert');
-// const denyBtn = document.getElementById('deny-btn');
-// const acceptBtn = document.getElementById('accept-btn');
+const cookieAlert = document.getElementById('cookie-alert');
+const denyBtn = document.getElementById('deny-btn');
+const acceptBtn = document.getElementById('accept-btn');
 
-// // Sayfa yüklendiğinde, kullanıcı daha önce "Kabul Et" butonuna basmış mı kontrol et
-// if (localStorage.getItem('cookie-consent') === 'accepted') {
-//   cookieAlert.style.display = 'none';
-// } else if (localStorage.getItem('cookie-consent') === 'denied') {
-//   // Kullanıcı "Reddet" butonuna basmışsa sayfayı yönlendir
-//   window.location.href = 'https://example.com/';  // Reddet butonuna basıldığında yönlendirilecek URL
-// }
+// Sayfa yüklendiğinde, kullanıcı daha önce "Kabul Et" butonuna basmış mı kontrol et
+if (localStorage.getItem('cookie-consent') === 'accepted') {
+  cookieAlert.style.display = 'none';
+} else if (localStorage.getItem('cookie-consent') === 'denied') {
+  // Kullanıcı "Reddet" butonuna basmışsa sayfayı yönlendir
+  window.location.href = 'https://example.com/';  // Reddet butonuna basıldığında yönlendirilecek URL
+}
 
-// denyBtn.addEventListener('click', function() {
-//   // "Reddet" butonuna basıldığında localStorage'da 'denied' değeri sakla ve sayfayı yönlendir
-//   localStorage.setItem('cookie-consent', 'denied');
-//   window.location.href = 'https://example.com/';  // Reddet butonuna basıldığında yönlendirilecek URL
-// });
+denyBtn.addEventListener('click', function() {
+  // "Reddet" butonuna basıldığında localStorage'da 'denied' değeri sakla ve sayfayı yönlendir
+  localStorage.setItem('cookie-consent', 'denied');
+  window.location.href = 'https://example.com/';  // Reddet butonuna basıldığında yönlendirilecek URL
+});
 
-// acceptBtn.addEventListener('click', function() {
-//   // "Kabul Et" butonuna basıldığında localStorage'da 'accepted' değeri sakla ve alert kutusunu gizle
-//   localStorage.setItem('cookie-consent', 'accepted');
-//   cookieAlert.classList.add('opacity-0');
+acceptBtn.addEventListener('click', function() {
+  // "Kabul Et" butonuna basıldığında localStorage'da 'accepted' değeri sakla ve alert kutusunu gizle
+  localStorage.setItem('cookie-consent', 'accepted');
+  cookieAlert.classList.add('opacity-0');
 
-//   // 0.5 saniye sonra tamamen gizle
-//   setTimeout(function() {
-//     cookieAlert.style.display = 'none';
-//   }, 500);
-// });
+  // 0.5 saniye sonra tamamen gizle
+  setTimeout(function() {
+    cookieAlert.style.display = 'none';
+  }, 500);
+});
 
 
 
