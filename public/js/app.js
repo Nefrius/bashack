@@ -5,9 +5,22 @@ document.addEventListener('DOMContentLoaded', () => {
   
   
 
-
-  updateStatus();
   
+  function checkMobile() {
+    var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || window.innerWidth <= 768;
+    if (isMobile) {
+        document.body.style.overflow = "hidden"; // Sayfanın kaydırılmasını engelliyoruz
+        document.getElementById("mobile-warning").style.display = "flex";
+    } else {
+        document.getElementById("mobile-warning").style.display = "none";
+        document.body.style.overflow = "auto"; // Sayfanın kaydırılmasını tekrar açar
+    }
+}
+
+document.addEventListener("DOMContentLoaded", checkMobile);
+window.addEventListener("resize", checkMobile);
+updateStatus();
+
 });
     document.getElementById('deny-btn').addEventListener('click', function() {
       // Sayfayı kapat
