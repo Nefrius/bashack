@@ -1,0 +1,244 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Bashack</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+
+  <!-- Tailwind CSS bağlantısını ekleyin -->
+
+  <link href="./css/styles.css" rel="stylesheet">
+
+  <style>
+    .card-transform {
+      transition: transform 0.3s ease;
+    }
+    .card-transform:hover {
+      transform: scale(1.05);
+    }
+
+    .fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #0a0a0a; /* adjust the background color to match your theme */
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #loading {
+      transition: opacity 0.5s ease-out;
+    }
+
+    /* Loading animation gizle */
+    #loading.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Alert kutusunun başlangıçta opak olmasını sağlıyoruz */
+    #cookie-alert {
+      opacity: 1;
+      transition: opacity 0.5s ease-out;
+    }
+
+    /* Fade-out için opaklığı sıfırlıyoruz */
+    #cookie-alert.opacity-0 {
+      opacity: 0;
+    }
+
+    #mobile-warning {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #0a0a0a; /* Arka planı hafif saydam yaptık */
+            font-size: 24px;
+            color: #fff;
+            z-index: 9999;
+            display: none; /* Başlangıçta gizle */
+        }
+
+        /* Mobil cihazlar için medya sorgusu */
+        @media (max-width: 768px) {
+            #mobile-warning {
+                display: flex; /* Ekran 768px ve altı olduğunda uyarıyı gösterir */
+            }
+        }
+
+  </style>
+  
+</head>
+
+<!-- <body class="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950" onclick="playClickSound()"> -->
+
+<body class="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950" onclick="playClickSound()">
+    
+  <div class="fixed" id="loading">
+    <span class="loading loading-ring loading-lg show"></span>
+  </div>
+  
+
+  <div id="mobile-warning">
+    <h1>Bu web sitesi telefon desteklemez</h1>
+  </div>
+
+  
+
+  <div id="content" class="hidden">
+
+    <div class="" id="">
+      <div role="alert" class="alert absolute z-10 w-[600px] ml-[1200px] mt-[800px] bg-slate-800/90 transition-opacity duration-500 " id="cookie-alert">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          class="stroke-info h-6 w-6 shrink-0">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+        <span>Siteyi kullanırsanız kullanım koşullarını kabul etmiş olursunuz.</span>
+        <div>
+          <button id="deny-btn" class="btn btn-sm">Reddet</button>
+          <button id="accept-btn" class="btn btn-sm btn-primary">Kabul Et</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex h-screen">
+
+      <!-- Sol Menü -->
+      <div class="w-64 bg-neutral-900 text-white flex flex-col justify-between font-gega-ic">
+        <!-- Üst Menü -->
+        <div class="p-4 mt-4">
+          <h2 class="text-xl font-bold mb-6">Bashack</h2>
+          <ul class="space-y-4">
+            <li><a href="../index.html" class="hover:text-pink-500 transition-colors duration-300">Tool</a></li>
+            <li><a href="#" class="hover:text-pink-500 transition-colors duration-300">Postlar</a></li>
+            <li><a href="#" class="hover:text-pink-500 transition-colors duration-300">Adminler</a></li>
+            <li><a href="#" class="hover:text-pink-500 transition-colors duration-300">Hakkımızda</a></li>
+          </ul>
+        </div>
+        
+        <div class="stats shadow ml-5 mr-5 mt-[400px] bg-neutral-800">
+          <div class="stat">
+            <div class="stat-title">Sayfa Tıklanım</div>
+            <div class="stat-value" id="daily-clicks">6</div>
+            <div class="stat-desc">21% bir önceki aya göre fazla</div>
+          </div>
+        </div>
+
+        <!-- Alt Menü -->
+        
+        <div class="discordicin flex items-center mb-10 ml-8">
+          <div class="relative">
+            <img id="profile-picture" class="w-[60px] h-[60px] rounded-full" src="" alt="Profile Picture">
+            <span id="status-circle" class="top-0 left-3 absolute w-3.5 h-3.5 bg-gray-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+          </div>
+          <div class="ml-3">
+            <p id="username" class="text-sm font-semibold text-white"></p>
+            <p id="status-text" class="text-xs text-gray-300"></p>
+          </div>
+        </div>
+        
+        
+     
+        <!-- Alt Menü -->
+        
+      </div>
+  
+      <!-- Sağ Kısım -->
+  
+      <div class="flex-1 bg-black-100 text-white/90 font-gega-baslik overflow-auto">
+          <div>
+            
+
+
+            <!-- baslangıc -->
+            <div class="flex space-x-5">
+              <!-- NMAP ve NEDİR? bölümü -->
+              <div class="diff w-[600px] h-[300px] ml-10 mt-10 rounded-md">
+                <div class="diff-item-1">
+                  <div class="bg-primary text-primary-content grid place-content-center text-9xl font-black">
+                    NMAP
+                  </div>
+                </div>
+                <div class="diff-item-2">
+                  <div class="bg-purple-700 grid place-content-center text-9xl font-black">NEDİR?</div>
+                </div>
+                <div class="diff-resizer"></div>
+              </div>
+            
+              <!-- Collapse bölümü -->
+              <div class="collapse bg-base-200 h-[170px] w-[790px] mt-10 ">
+                <input type="checkbox" />
+                <div class="collapse-title text-xl font-medium">Nmap Nedir? -TIKLA-</div>
+                <div class="collapse-content">
+                  <p>Nmap, günümüzdeki en gelişmiş ağ tarama araçlarının başında gelir. Nmap, ağda bulunan cihazların IP adreslerini, cihaz bilgisini, açık portlarını, işletim sistemini, açık portlarda çalışan servisleri ve cihazlarda bulunan güvenlik açıklarını tespit etmek için kullanılır.</p>
+                </div>
+              </div>
+              
+            </div>
+
+            
+            <!-- sonyer -->
+
+            <div class="font-gega-ic mt-10">
+             <h1 class="mt-10"><span class="text-purple-500 text-[24px] ml-10 mt-10 font-semibold">Örnek:</span> Tek bir Host yada IP v4 Adresini Tarama</h1> 
+            </div>
+            
+
+            <div class="flex items-start space-x-4 ml-10 mt-5">
+              <!-- Resim -->
+              <img src="nmap1.png" alt="slm" class="rounded-lg w-[800px] h-[400px]">
+            
+              <!-- Kod bloğu -->
+              <div class="mockup-code bg-base-200 mt-0 ml-0">
+                <pre data-prefix="1"><code>nmap 192.168.1.44</code></pre>
+              </div>
+            </div>
+
+            <div class="font-gega-ic mt-10">
+              <h1 class="mt-10"><span class="text-purple-500 text-[24px] ml-10 mt-10 font-semibold">Örnek:</span> Birden Fazla IP Adresi ya da Bir IP Subnet’ini Taramak İçin</h1> 
+            </div>
+            
+            <div class="flex items-start space-x-4 ml-10 mt-5 mb-10">
+              <!-- Resim -->
+              <img src="nmap2.png" alt="slm" class="rounded-lg w-[800px] h-[400px]">
+            
+              <!-- Kod bloğu -->
+              <div class="mockup-code bg-base-200 mt-0 ml-0">
+                <pre data-prefix="1"><code>nmap 192.168.1.1 192.168.1.44</code></pre>
+              </div>
+            </div>
+
+      </div>
+    </div>
+  </div>
+ 
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="./nmap.js"></script>
+</body>
+</html>
