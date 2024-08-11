@@ -5,21 +5,24 @@ document.addEventListener('DOMContentLoaded', () => {
   
   
 
-  
   function checkMobile() {
-    var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || window.innerWidth <= 768;
+    const warning = document.getElementById('mobile-warning');
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
+    // Uyarıyı sadece mobil cihazlarda gösterir
     if (isMobile) {
-        document.body.style.overflow = "hidden"; // Sayfanın kaydırılmasını engelliyoruz
-        document.getElementById("mobile-warning").style.display = "flex";
+        warning.style.display = 'flex';
     } else {
-        document.getElementById("mobile-warning").style.display = "none";
-        document.body.style.overflow = "auto"; // Sayfanın kaydırılmasını tekrar açar
+        warning.style.display = 'none';
     }
 }
 
 document.addEventListener("DOMContentLoaded", checkMobile);
 window.addEventListener("resize", checkMobile);
+
 updateStatus();
+
+
 
 });
     document.getElementById('deny-btn').addEventListener('click', function() {
